@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SoundWave</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body { background-color: #f5f5f5; }
+        
+        header {
+            background-color: #2c3e50;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo span { color: #3498db; }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li { margin-left: 1.5rem; }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover { color: #3498db; }
+        
+        .search-cart {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box {
+            margin-right: 1rem;
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: none;
+            width: 200px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+        }
+        
+        .about-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 40px 20px;
+	    text-align: center;
+        }
+        
+       .team-grid {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+	.team-card {
+    background: white;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 0; /* Remove padding so image takes full width */
+    overflow: hidden; /* Prevent image overflow */
+}
+
+
+        
+         .team-member {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        max-width: 500px; /* Add this to control the width */
+    }
+        
+        .member-img {
+        width: 100%;
+        max-height: 600px; /* Increased height for tall images */
+        object-fit: contain; /* Changed from 'cover' to 'contain' */
+        object-position: top; /* Show from the top */
+    }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .member-title {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 1rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #34495e;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Sound<span>Wave</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products-page.html">Products</a></li>
+                    <li><a href="categories-page.html">Categories</a></li>
+                    <li><a href="deals-page.html">Deals</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="contact-page.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-cart">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products...">
+                </div>
+               <div class="cart-icon" onclick="window.location.href='cart-page.html'">
+    🛒
+    <div class="cart-count" id="cartCountTop">0</div>
+</div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="about-section">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content">
+                <div>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.6;">Founded in 2015, SoundWave began with a simple mission: to create audio products that deliver exceptional sound quality at accessible prices. What started as a small team of audio enthusiasts working out of a garage has grown into a company trusted by customers worldwide.</p>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.6;">Our team of engineers and designers work tirelessly to create products that combine cutting-edge technology with sleek, user-friendly designs. We believe that everyone deserves to experience music the way artists intended, with clarity and precision that brings every note to life.</p>
+                    <p style="line-height: 1.6;">Today, SoundWave offers a complete range of audio solutions from wireless earbuds to premium headphones and portable speakers. Despite our growth, we remain committed to our founding principles: superior sound, thoughtful design, and exceptional value.</p>
+                </div>
+                <img src="image15.jpeg" alt="SoundWave Company" class="about-image">
+            </div>
+        </section>
+        
+       <section class="team-section">
+    <h2 class="section-title">Meet Our Team</h2>
+    <div class="team-grid">
+        <div class="team-member">
+            <img src="boy-image.png" alt="Kushang Acharya" class="member-img">
+            <div class="member-info">
+                <h3 class="member-name">Kushang Acharya</h3>
+                <p class="member-title">Roll no.14</p>
+                <p>Workoholic student which works honestly and not betraying with his work</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">Headphones</a></li>
+                    <li><a href="#">Earbuds</a></li>
+                    <li><a href="#">Speakers</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Deals</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact-page.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about-us-page.html">Our Story</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Store Locations</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/kushang.acharya">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com/in/kushang-acharya-938a712a6/">Linkedin</a></li>
+                    <li><a href="https://www.instagram.com/_kushang_acharya_/">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 SoundWave. All rights reserved.</p>
+        </div>
+    </footer>
+<script>
+    function initCartCount() {
+        const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+        
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        document.getElementById('cartCountTop').textContent = totalItems;
+    }
+    
+    document.addEventListener('DOMContentLoaded', initCartCount);
+</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWave - Deals & Promotions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body { background-color: #f5f5f5; }
+        
+        header {
+            background-color: #2c3e50;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo span { color: #3498db; }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li { margin-left: 1.5rem; }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover { color: #3498db; }
+        
+        .search-cart {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box {
+            margin-right: 1rem;
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: none;
+            width: 200px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+        }
+        
+        .deals-header {
+            background-color: #e74c3c;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        
+        .deals-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+        
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .deal-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .deal-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .deal-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .deal-info {
+            padding: 1rem;
+        }
+        
+        .deal-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .deal-price {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .deal-original {
+            text-decoration: line-through;
+            color: #7f8c8d;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover { background-color: #2980b9; }
+        
+        .countdown {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #e74c3c;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 1rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+        
+        .footer-column ul { list-style: none; }
+        
+        .footer-column ul li { margin-bottom: 0.5rem; }
+        
+        .footer-column ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover { color: #3498db; }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #34495e;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Sound<span>Wave</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products-page.html">Products</a></li>
+                    <li><a href="categories-page.html">Categories</a></li>
+                    <li><a href="deals-page.html">Deals</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="contact-page.html">Contact</a></li>
+
+                </ul>
+            </nav>
+            <div class="search-cart">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products...">
+                </div>
+                <div class="cart-icon" onclick="window.location.href='cart-page.html'">
+    🛒
+    <div class="cart-count" id="cartCountTop">0</div>
+</div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="deals-header">
+            <h1>Limited Time Offers</h1>
+            <p>Exclusive deals on premium audio products</p>
+        </div>
+        
+        <section class="deals-container">
+            <h2 class="section-title">Hot Deals</h2>
+            <div class="deals-grid">
+                <div class="deal-card">
+                    <div class="deal-badge">20% OFF</div>
+                    <img src="image3.jpg" alt="SoundWave Pro Earbuds" class="deal-img">
+                    <div class="deal-info">
+                        <h3 class="deal-title">SoundWave Pro Earbuds</h3>
+                        <div class="deal-price">₹129.99 <span class="deal-original">₹159.99</span></div>
+                        <p>Premium wireless earbuds with active noise cancellation.</p>
+                        <div class="countdown">Offer ends in 2 days</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="deal-badge">15% OFF</div>
+                    <img src="image4.jpg" alt="SoundWave Elite Headphones" class="deal-img">
+                    <div class="deal-info">
+                        <h3 class="deal-title">SoundWave Elite Headphones</h3>
+                        <div class="deal-price">₹169.99 <span class="deal-original">₹199.99</span></div>
+                        <p>Over-ear headphones with premium sound quality.</p>
+                        <div class="countdown">Offer ends in 5 days</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="deal-badge">25% OFF</div>
+                    <img src="image5.jpeg" alt="SoundWave Mini Speaker" class="deal-img">
+                    <div class="deal-info">
+                        <h3 class="deal-title">SoundWave Mini Speaker</h3>
+                        <div class="deal-price">₹59.99 <span class="deal-original">₹79.99</span></div>
+                        <p>Portable Bluetooth speaker with 12-hour battery life.</p>
+                        <div class="countdown">Offer ends in 3 days</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="deals-container">
+            <h2 class="section-title">Bundle Deals</h2>
+            <div class="deals-grid">
+                <div class="deal-card">
+                    <div class="deal-badge">SAVE 30%</div>
+                    <img src="image6.jpg" alt="SoundWave Sport Bundle" class="deal-img">
+                    <div class="deal-info">
+                        <h3 class="deal-title">Fitness Audio Bundle</h3>
+                        <div class="deal-price">₹119.99 <span class="deal-original">₹169.99</span></div>
+                        <p>SoundWave Sport Earbuds + Fitness Tracker Band</p>
+                        <div class="countdown">Limited stock available</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="deal-badge">SAVE 25%</div>
+                    <img src="image3.jpg" alt="Home Audio Bundle" class="deal-img">
+                    <div class="deal-info">
+                        <h3 class="deal-title">Home Audio Bundle</h3>
+                        <div class="deal-price">₹229.99 <span class="deal-original">₹299.99</span></div>
+                        <p>SoundWave Mini Speaker + Elite Headphones</p>
+                        <div class="countdown">Offer ends in 7 days</div>
+                        <a href="#" class="btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">Headphones</a></li>
+                    <li><a href="#">Earbuds</a></li>
+                    <li><a href="#">Speakers</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Deals</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Store Locations</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/kushang.acharya">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com/in/kushang-acharya-938a712a6/">Linkedin</a></li>
+                    <li><a href="https://www.instagram.com/_kushang_acharya_/">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Pinterest</a></li>
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 SoundWave. All rights reserved.</p>
+        </div>
+    </footer>
+<script>
+    function initCartCount() {
+        const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+        
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        document.getElementById('cartCountTop').textContent = totalItems;
+    }
+    
+    document.addEventListener('DOMContentLoaded', initCartCount);
+</script>
+</body>
+</html>

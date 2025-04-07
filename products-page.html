@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - SoundWave</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;}
+        body {background-color: #f5f5f5;}
+        header {background-color: #2c3e50; padding: 1rem; position: sticky; top: 0; z-index: 100;}
+        .header-container {display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;}
+        .logo {color: white; font-size: 1.5rem; font-weight: bold;}
+        .logo span {color: #3498db;}
+        nav ul {display: flex; list-style: none;}
+        nav ul li {margin-left: 1.5rem;}
+        nav ul li a {color: white; text-decoration: none; transition: color 0.3s;}
+        nav ul li a:hover {color: #3498db;}
+        .search-cart {display: flex; align-items: center;}
+        .search-box {margin-right: 1rem; position: relative;}
+        .search-box input {padding: 0.5rem; border-radius: 4px; border: none; width: 200px;}
+        .cart-icon {position: relative; color: white; font-size: 1.2rem; cursor: pointer;}
+        .cart-count {position: absolute; top: -8px; right: -8px; background-color: #e74c3c; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; justify-content: center; align-items: center; font-size: 0.7rem;}
+        .page-title {text-align: center; padding: 2rem 0; background-color: #ecf0f1; color: #2c3e50;}
+        .filters {background-color: white; padding: 1rem; margin: 1rem auto; max-width: 1200px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+        .filter-options {display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;}
+        .filter-item {display: flex; align-items: center; gap: 0.5rem;}
+        .products-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 2rem auto; padding: 0 1rem;}
+        .product-card {background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s;}
+        .product-card:hover {transform: translateY(-5px);}
+        .product-img {height: 200px; width: 100%; object-fit: cover;}
+        .product-info {padding: 1rem;}
+        .product-title {font-size: 1.2rem; margin-bottom: 0.5rem; color: #2c3e50;}
+        .product-price {font-size: 1.1rem; color: #2c3e50; font-weight: bold; margin-bottom: 0.5rem;}
+        .product-rating {color: #f39c12; margin-bottom: 0.5rem;}
+        .btn {display: inline-block; padding: 0.8rem 1.5rem; background-color: #3498db; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; transition: background-color 0.3s;}
+        .btn:hover {background-color: #2980b9;}
+        .btn-sm {padding: 0.5rem 1rem;}
+        .quick-view {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000;}
+        .quick-view-content {background-color: white; width: 90%; max-width: 800px; border-radius: 8px; overflow: hidden; display: flex; position: relative;}
+        .quick-view-close {position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; color: #2c3e50;}
+        .quick-view-img {width: 40%; object-fit: cover;}
+        .quick-view-info {padding: 2rem; width: 60%;}
+        .pagination {display: flex; justify-content: center; margin: 2rem 0; gap: 0.5rem;}
+        .pagination a {padding: 0.5rem 1rem; background-color: white; border-radius: 4px; text-decoration: none; color: #2c3e50; transition: background-color 0.3s;}
+        .pagination a:hover, .pagination a.active {background-color: #3498db; color: white;}
+        footer {background-color: #2c3e50; color: white; padding: 1rem; text-align: center;}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Sound<span>Wave</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products-page.html">Products</a></li>
+                    <li><a href="categories-page.html">Categories</a></li>
+                    <li><a href="deals-page.html">Deals</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="contact-page.html">Contact</a></li>
+
+                </ul>
+            </nav>
+            <div class="search-cart">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                </div>
+               <div class="cart-icon" onclick="window.location.href='cart-page.html'">
+    🛒
+    <div class="cart-count" id="cartCountTop">0</div>
+</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="page-title">
+        <h1>All Products</h1>
+    </div>
+    
+    <div class="filters">
+        <h3>Filter Products</h3>
+        <div class="filter-options">
+            <div class="filter-item">
+                <label for="category">Category:</label>
+                <select id="category" onchange="filterProducts()">
+                    <option value="all">All</option>
+                    <option value="earbuds">Earbuds</option>
+                    <option value="headphones">Headphones</option>
+                    <option value="speakers">Speakers</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="price">Price Range:</label>
+                <select id="price" onchange="filterProducts()">
+                    <option value="all">All</option>
+                    <option value="0-50">Under $50</option>
+                    <option value="50-100">$50 - $100</option>
+                    <option value="100-200">$100 - $200</option>
+                    <option value="200+">$200+</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="rating">Rating:</label>
+                <select id="rating" onchange="filterProducts()">
+                    <option value="0">All</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <button class="btn btn-sm" onclick="resetFilters()">Reset Filters</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="products-grid" id="productsGrid"></div>
+    
+    <div class="pagination">
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">Next →</a>
+    </div>
+    
+    <div class="quick-view" id="quickView">
+        <div class="quick-view-content">
+            <div class="quick-view-close" onclick="closeQuickView()">✕</div>
+            <img id="quickViewImg" src="" alt="" class="quick-view-img">
+            <div class="quick-view-info">
+                <h2 id="quickViewTitle"></h2>
+                <div id="quickViewPrice" class="product-price"></div>
+                <div id="quickViewRating" class="product-rating"></div>
+                <p id="quickViewDesc"></p>
+                <button class="btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 SoundWave. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        const products = [
+            {id: 1, name: "SoundWave Pro Earbuds", price: 129.99, oldPrice: 159.99, rating: 5, reviews: 128, category: "earbuds", image: "image3.jpg", description: "Our flagship wireless earbuds with active noise cancellation and 10-hour battery life."},
+            {id: 2, name: "SoundWave Elite Headphones", price: 199.99, rating: 4, reviews: 87, category: "headphones", image: "image4.jpg", description: "Premium over-ear headphones with studio-quality sound and supreme comfort."},
+            {id: 3, name: "SoundWave Mini Speaker", price: 79.99, rating: 4, reviews: 56, category: "speakers", image: "image5.jpeg", description: "Portable Bluetooth speaker with surprising sound quality and 12-hour battery life."},
+            {id: 4, name: "SoundWave Sport Earbuds", price: 89.99, rating: 5, reviews: 42, category: "earbuds", image: "image6.jpg", description: "Water-resistant earbuds perfect for workouts and outdoor activities."},
+            {id: 5, name: "SoundWave Ultra Headphones", price: 249.99, rating: 5, reviews: 63, category: "headphones", image: "image7.jpg", description: "Our top-tier wireless headphones with ultra-comfort design and 30-hour battery life."},
+            {id: 6, name: "SoundWave Party Speaker", price: 149.99, rating: 4, reviews: 38, category: "speakers", image: "image8.jpg", description: "Powerful speaker with LED lights and deep bass for your parties."},
+        ];
+
+	function getCart() {
+        return JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+    }
+         function saveCart(cart) {
+        localStorage.setItem('soundwaveCart', JSON.stringify(cart));
+        updateCartCount();
+    }
+	function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        document.querySelector('.cart-count').textContent = count;
+     }
+	
+
+	function initCartCount() {
+        updateCartCount();
+    }
+
+        function displayProducts(productList) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            productList.forEach(product => {
+                const stars = '★'.repeat(product.rating) + '☆'.repeat(5 - product.rating);
+                const oldPrice = product.oldPrice ? `<span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$${product.oldPrice}</span>` : '';
+                
+                grid.innerHTML += `
+                    <div class="product-card" data-id="${product.id}">
+                        <img src="${product.image}" alt="${product.name}" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-price">$${product.price} ${oldPrice}</div>
+                            <div class="product-rating">${stars} (${product.reviews} reviews)</div>
+                            <button class="btn" onclick="quickView(${product.id})">Quick View</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        function filterProducts() {
+            const category = document.getElementById('category').value;
+            const price = document.getElementById('price').value;
+            const rating = parseInt(document.getElementById('rating').value);
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            let filtered = products.filter(product => {
+                // Category filter
+                if (category !== 'all' && product.category !== category) return false;
+                
+                // Price filter
+                if (price === '0-50' && product.price >= 50) return false;
+                if (price === '50-100' && (product.price < 50 || product.price >= 100)) return false;
+                if (price === '100-200' && (product.price < 100 || product.price >= 200)) return false;
+                if (price === '200+' && product.price < 200) return false;
+                
+                // Rating filter
+                if (rating > 0 && product.rating < rating) return false;
+                
+                // Search filter
+                if (searchTerm && !product.name.toLowerCase().includes(searchTerm)) return false;
+                
+                return true;
+            });
+            
+            displayProducts(filtered);
+        }
+        
+        function resetFilters() {
+            document.getElementById('category').value = 'all';
+            document.getElementById('price').value = 'all';
+            document.getElementById('rating').value = '0';
+            document.getElementById('searchInput').value = '';
+            displayProducts(products);
+        }
+        
+        function quickView(id) {
+            const product = products.find(p => p.id === id);
+            document.getElementById('quickViewImg').src = product.image;
+            document.getElementById('quickViewTitle').textContent = product.name;
+            document.getElementById('quickViewPrice').textContent = `$${product.price}`;
+            document.getElementById('quickViewRating').textContent = '★'.repeat(product.rating) + '☆'.repeat(5 - product.rating) + ` (${product.reviews} reviews)`;
+            document.getElementById('quickViewDesc').textContent = product.description;
+            document.getElementById('quickView').style.display = 'flex';
+        }
+        
+        function closeQuickView() {
+            document.getElementById('quickView').style.display = 'none';
+        }
+        
+        function addToCart() {
+    const quickViewTitle = document.getElementById('quickViewTitle').textContent;
+    const product = products.find(p => p.name === quickViewTitle);
+    
+    if (!product) return;
+    
+    let cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+    
+    const existingItemIndex = cart.findIndex(item => item.id === product.id);
+    
+    if (existingItemIndex !== -1) {
+        if (cart[existingItemIndex].quantity < 10) {
+            cart[existingItemIndex].quantity += 1;
+        }
+    } 
+	else {
+        cart.push({
+            id: product.id,
+            quantity: 1
+        });
+    }
+    
+    localStorage.setItem('soundwaveCart', JSON.stringify(cart));
+    
+    const count = document.querySelector('.cart-count');
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    count.textContent = totalItems;
+    
+    closeQuickView();
+    
+    alert('Product added to cart!');
+}
+        
+        displayProducts(products);
+        
+        document.getElementById('searchInput').addEventListener('input', filterProducts);
+    </script>
+</body>
+</html>
