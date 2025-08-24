@@ -32,15 +32,18 @@
             margin: 0 auto;
         }
         
-        .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .logo span {
-            color: #3498db;
-        }
+       .logo {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: none;  /* remove underline */
+}
+
+.logo span {
+  color: #3498db;
+}
+
         
         nav ul {
             display: flex;
@@ -362,7 +365,7 @@
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">Sound<span>Wave</span></div>
+           <a href="index.html" class="logo">Sound<span>Wave</span></a>	
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -375,7 +378,9 @@
             </nav>
             <div class="search-cart">
                 <div class="search-box">
-                    <input type="text" placeholder="Search products...">
+                   <input type="text" placeholder="Search products..." 
+       onblur="logEvent('search', this.value)">
+
                 </div>
                 <div class="cart-icon" onclick="window.location.href='cart-page.html'">
     🛒
@@ -611,5 +616,17 @@
             }
         });
     </script>
+<script src="tracker.js"></script>
+<script>
+  fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "visit_page",
+      productId: "index.html"
+    })
+  }).catch(err => console.error("❌ Error sending activity:", err));
+</script>
+
 </body>
 </html>
