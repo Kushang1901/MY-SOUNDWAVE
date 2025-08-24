@@ -1,29 +1,37 @@
-app.post("/track", async (req, res) => {
+// ✅ Always generate a NEW sessionId for each visit
+const sessionId = crypto.randomUUID();
+
+// ✅ Replace with your deployed backend URL
+const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";
+
+// ✅ Function to log events
+async function logEvent(action, productId = null) {
   try {
-    const { sessionId, productId, action, userId } = req.body;
-
-    // ✅ Always create a new session document for every visit
-    const session = new UserSession({
-      userId: userId || "guest",
-      sessionId,
-      userAgent: req.headers["user-agent"],
-      ip: req.ip,
-      actions: [
-        {
-          action: action || "visit_page",
-          productId,
-          timestamp: new Date(),
-        },
-      ],
-      startedAt: new Date(),
-      endedAt: new Date(),
+    await fetch(`${BACKEND_URL}/track`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: localStorage.getItem("userId") || "guest",
+        sessionId,
+        action,
+        productId
+      }),
     });
-
-    await session.save();
-
-    res.json({ message: "✅ New session created", session });
   } catch (err) {
-    console.error("❌ Error tracking action:", err);
-    res.status(500).json({ error: "Server error" });
+    console.error("❌ Error logging event:", err);
+  }
+}
+
+// ✅ Auto log page visits
+document.addEventListener("DOMContentLoaded", () => {
+  const page = window.location.pathname.split("/").pop() || "home";
+  logEvent("visit_page", page);
+});
+
+// ✅ Example usage: log clicks on products
+document.addEventListener("click", (e) => {
+  if (e.target.matches("[data-product-id]")) {
+    const productId = e.target.getAttribute("data-product-id");
+    logEvent("click_product", productId);
   }
 });
