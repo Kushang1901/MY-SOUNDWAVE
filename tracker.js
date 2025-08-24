@@ -4,7 +4,8 @@ if (!localStorage.getItem("sessionId")) {
 }
 const sessionId = localStorage.getItem("sessionId");
 
-const BACKEND_URL = "http://localhost:5000"; // later replace with Railway URL
+// ✅ Your deployed backend URL
+const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";
 
 // ✅ Log Event
 async function logEvent(action, productId = null) {
@@ -20,7 +21,7 @@ async function logEvent(action, productId = null) {
       }),
     });
   } catch (err) {
-    console.error("Error logging event:", err);
+    console.error("❌ Error logging event:", err);
   }
 }
 
