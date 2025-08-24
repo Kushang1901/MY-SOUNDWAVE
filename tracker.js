@@ -1,16 +1,13 @@
-// ✅ Session ID stored in browser
-if (!localStorage.getItem("sessionId")) {
-  localStorage.setItem("sessionId", crypto.randomUUID());
-}
-const sessionId = localStorage.getItem("sessionId");
+// ✅ Always generate a NEW sessionId for each visit
+const sessionId = crypto.randomUUID();
 
-// ✅ Your deployed backend URL
+// ✅ Replace with your deployed backend URL
 const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";
 
-// ✅ Log Event
+// ✅ Function to log events
 async function logEvent(action, productId = null) {
   try {
-    await fetch(`${BACKEND_URL}/log`, {
+    await fetch(`${BACKEND_URL}/track`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -29,4 +26,12 @@ async function logEvent(action, productId = null) {
 document.addEventListener("DOMContentLoaded", () => {
   const page = window.location.pathname.split("/").pop() || "home";
   logEvent("visit_page", page);
+});
+
+// ✅ Example usage: log clicks on products
+document.addEventListener("click", (e) => {
+  if (e.target.matches("[data-product-id]")) {
+    const productId = e.target.getAttribute("data-product-id");
+    logEvent("click_product", productId);
+  }
 });
