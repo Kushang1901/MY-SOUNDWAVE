@@ -334,12 +334,78 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        @media (max-width: 768px) {
+            /* Navigation */
+            nav ul {
+                flex-direction: column;
+                background-color: #2c3e50;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                display: none;
+            }
+
+                nav ul.show {
+                    display: flex;
+                }
+
+                nav ul li {
+                    margin: 1rem 0;
+                    text-align: center;
+                }
+
+            .menu-toggle {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            /* Search box */
+            .search-box input {
+                width: 120px;
+            }
+
+            /* Page title */
+            .page-title {
+                padding: 1rem;
+            }
+
+                .page-title h1 {
+                    font-size: 1.8rem;
+                }
+
+                .page-title p {
+                    font-size: 1rem;
+                    padding: 0 1rem;
+                }
+
+            /* Categories grid */
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .category-card {
+                text-align: center;
+            }
+
+            /* Footer */
+            footer {
+                padding: 1.5rem 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-          <a href="index.html" class="logo">Sound<span>Wave</span></a>
+            <a href="index.html" class="logo">Sound<span>Wave</span></a>
+            <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</div>
 
             <nav>
                 <ul>
@@ -347,21 +413,21 @@
                     <li><a href="products-page.html">Products</a></li>
                     <li><a href="categories-page.html" class="active">Categories</a></li>
                     <li><a href="deals-page.html">Deals</a></li>
-                   <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
 
                 </ul>
             </nav>
             <div class="search-cart">
                 <div class="search-box">
-                   <input type="text" placeholder="Search products..." 
-       onblur="logEvent('search', this.value)">
+                    <input type="text" placeholder="Search products..."
+                           onblur="logEvent('search', this.value)">
 
                 </div>
                 <div class="cart-icon" onclick="window.location.href='cart-page.html'">
-    🛒
-    <div class="cart-count" id="cartCountTop">0</div>
-</div>
+                    🛒
+                    <div class="cart-count" id="cartCountTop">0</div>
+                </div>
             </div>
         </div>
     </header>

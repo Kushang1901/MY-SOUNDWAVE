@@ -229,12 +229,80 @@
             padding-top: 1rem;
             border-top: 1px solid #34495e;
         }
+        @media (max-width: 768px) {
+            /* Navigation */
+            nav ul {
+                flex-direction: column;
+                background-color: #2c3e50;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                display: none;
+            }
+
+                nav ul.show {
+                    display: flex;
+                }
+
+                nav ul li {
+                    margin: 1rem 0;
+                    text-align: center;
+                }
+
+            .menu-toggle {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            /* Search box */
+            .search-box input {
+                width: 120px;
+            }
+
+            /* Deals header */
+            .deals-header {
+                padding: 1.5rem 1rem;
+            }
+
+                .deals-header h1 {
+                    font-size: 1.8rem;
+                }
+
+                .deals-header p {
+                    font-size: 1rem;
+                }
+
+            /* Deals grid */
+            .deals-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .deal-card {
+                text-align: center;
+            }
+
+            .deal-img {
+                height: 180px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 1.5rem 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-           <a href="index.html" class="logo">Sound<span>Wave</span></a>
+            <a href="index.html" class="logo">Sound<span>Wave</span></a>
+            <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</div>
 
             <nav>
                 <ul>
@@ -249,14 +317,14 @@
             </nav>
             <div class="search-cart">
                 <div class="search-box">
-                   <input type="text" placeholder="Search products..." 
-       onblur="logEvent('search', this.value)">
+                    <input type="text" placeholder="Search products..."
+                           onblur="logEvent('search', this.value)">
 
                 </div>
                 <div class="cart-icon" onclick="window.location.href='cart-page.html'">
-    🛒
-    <div class="cart-count" id="cartCountTop">0</div>
-</div>
+                    🛒
+                    <div class="cart-count" id="cartCountTop">0</div>
+                </div>
             </div>
         </div>
     </header>

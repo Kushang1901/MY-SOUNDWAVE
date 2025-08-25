@@ -54,34 +54,111 @@
         .pagination a {padding: 0.5rem 1rem; background-color: white; border-radius: 4px; text-decoration: none; color: #2c3e50; transition: background-color 0.3s;}
         .pagination a:hover, .pagination a.active {background-color: #3498db; color: white;}
         footer {background-color: #2c3e50; color: white; padding: 1rem; text-align: center;}
+        @media (max-width: 768px) {
+            /* Navigation */
+            nav ul {
+                flex-direction: column;
+                background-color: #2c3e50;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                display: none;
+            }
+
+                nav ul.show {
+                    display: flex;
+                }
+
+                nav ul li {
+                    margin: 1rem 0;
+                    text-align: center;
+                }
+
+            .menu-toggle {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            /* Search */
+            .search-box input {
+                width: 120px;
+            }
+
+            /* Page Title */
+            .page-title {
+                padding: 1rem;
+            }
+
+                .page-title h1 {
+                    font-size: 1.5rem;
+                }
+
+            /* Filters */
+            .filter-options {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .filter-item {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            /* Products grid */
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* Quick View modal */
+            .quick-view-content {
+                flex-direction: column;
+                width: 95%;
+            }
+
+            .quick-view-img, .quick-view-info {
+                width: 100%;
+            }
+
+            /* Footer */
+            footer {
+                padding: 1.5rem 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
     </style>
 </head>
 <body>
     <header>
-  <div class="header-container">
-    <a href="index.html" class="logo">Sound<span>Wave</span></a>
+        <div class="header-container">
+            <a href="index.html" class="logo">Sound<span>Wave</span></a>
+            <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</div>
 
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-<li><a href="products-page.html">Products</a></li>
-        <li><a href="categories-page.html">Categories</a></li>
-        <li><a href="deals-page.html">Deals</a></li>
-        <li><a href="about-us-page.html">About Us</a></li>
-        <li><a href="contact-page.html">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="search-cart">
-      <div class="search-box">
-        <input id="searchInput" type="text" placeholder="🔍 Search products..." 
-               onblur="logEvent('search', this.value)">
-      </div>
-      <div class="cart-icon" onclick="window.location.href='cart-page.html'">
-        🛒
-        <div class="cart-count" id="cartCountTop">0</div>
-      </div>
-    </div>
-  </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products-page.html">Products</a></li>
+                    <li><a href="categories-page.html">Categories</a></li>
+                    <li><a href="deals-page.html">Deals</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="contact-page.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-cart">
+                <div class="search-box">
+                    <input id="searchInput" type="text" placeholder="🔍 Search products..."
+                           onblur="logEvent('search', this.value)">
+                </div>
+                <div class="cart-icon" onclick="window.location.href='cart-page.html'">
+                    🛒
+                    <div class="cart-count" id="cartCountTop">0</div>
+                </div>
+            </div>
+        </div>
 </header>
 
     
