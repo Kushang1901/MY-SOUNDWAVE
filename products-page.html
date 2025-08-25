@@ -54,6 +54,10 @@
         .pagination a {padding: 0.5rem 1rem; background-color: white; border-radius: 4px; text-decoration: none; color: #2c3e50; transition: background-color 0.3s;}
         .pagination a:hover, .pagination a.active {background-color: #3498db; color: white;}
         footer {background-color: #2c3e50; color: white; padding: 1rem; text-align: center;}
+        .menu-toggle {
+            display: none; /* hidden by default */
+        }
+
         @media (max-width: 768px) {
             /* Navigation */
             nav ul {
@@ -80,6 +84,8 @@
                 color: white;
                 font-size: 1.5rem;
                 cursor: pointer;
+                top: 18px;
+                right: 20px; 
             }
 
             /* Search */
