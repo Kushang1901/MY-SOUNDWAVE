@@ -582,10 +582,13 @@
                     return;
                 }
 
+                // ✅ Save user info in localStorage
                 localStorage.setItem("userId", data.userId);
-                localStorage.setItem("userName", data.name);
+                localStorage.setItem("username", data.name); // <--- store username
 
                 alert("Welcome " + data.name + "! 🎉");
+
+                // ✅ Redirect back to home
                 window.location.href = "index.html";
             } catch (err) {
                 console.error("Login error:", err);
