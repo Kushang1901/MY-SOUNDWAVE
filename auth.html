@@ -251,7 +251,7 @@
                 Welcome back! You've successfully signed in.
             </div>
 
-            <form id="loginForm">
+            <form id="loginFormElement">
                 <div class="form-group">
                     <label for="loginEmail">Email Address</label>
                     <input type="email" id="loginEmail" name="email" required>
@@ -298,7 +298,7 @@
                 Account created successfully! Please check your email to verify your account.
             </div>
 
-            <form id="signupForm">
+            <form id="signupFormElement">
                 <div class="form-group">
                     <label for="signupName">Full Name</label>
                     <input type="text" id="signupName" name="name" required>
@@ -537,9 +537,9 @@
         const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";  // ✅ use your Render backend
 
         // Handle Signup
-        document.getElementById("signupForm")?.addEventListener("submit", async (e) => {
+        // Handle Signup
+        document.getElementById("signupFormElement")?.addEventListener("submit", async (e) => {
             e.preventDefault();
-
             const name = document.getElementById("signupName").value;
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
@@ -555,8 +555,7 @@
                 alert(data.message);
 
                 if (data.success) {
-                    // Redirect user to login page after signup
-                    window.location.href = "login.html";
+                    window.location.href = "auth.html"; // go back to login screen
                 }
             } catch (err) {
                 console.error("Signup error:", err);
@@ -565,9 +564,8 @@
         });
 
         // Handle Login
-        document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
+        document.getElementById("loginFormElement")?.addEventListener("submit", async (e) => {
             e.preventDefault();
-
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
 
@@ -584,19 +582,17 @@
                     return;
                 }
 
-                // ✅ Save user info in localStorage (used by tracker.js)
                 localStorage.setItem("userId", data.userId);
                 localStorage.setItem("userName", data.name);
 
                 alert("Welcome " + data.name + "! 🎉");
-
-                // Redirect to homepage (or any page)
                 window.location.href = "index.html";
             } catch (err) {
                 console.error("Login error:", err);
                 alert("Login failed. Try again.");
             }
         });
+
     </script>
 
 </body>
