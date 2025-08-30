@@ -152,7 +152,8 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
-                    <li><a href="auth.html">Login / Signup</a></li>
+                    <li><a href="auth.html" id="auth-link">Login / Signup</a></li>
+
 
                 </ul>
             </nav>
@@ -230,91 +231,91 @@
 
             if (cart.length === 0) {
                 container.innerHTML = `
-                        <div class="cart-empty">
-                            <h2>Your cart is empty</h2>
-                            <p>Looks like you haven't added any products to your cart yet.</p>
-                            <a href="products-page.html" class="btn">Continue Shopping</a>
-                        </div>
-                    `;
+                            <div class="cart-empty">
+                                <h2>Your cart is empty</h2>
+                                <p>Looks like you haven't added any products to your cart yet.</p>
+                                <a href="products-page.html" class="btn">Continue Shopping</a>
+                            </div>
+                        `;
                 return;
             }
 
             const totals = calculateTotals();
 
             let cartItemsHTML = `
-                    <div class="cart-items">
-                        <div class="cart-header">
-                            <div></div>
-                            <div>Product</div>
-                            <div>Price</div>
-                            <div>Quantity</div>
-                            <div>Total</div>
-                            <div></div>
-                        </div>
-                `;
+                        <div class="cart-items">
+                            <div class="cart-header">
+                                <div></div>
+                                <div>Product</div>
+                                <div>Price</div>
+                                <div>Quantity</div>
+                                <div>Total</div>
+                                <div></div>
+                            </div>
+                    `;
 
             cart.forEach(item => {
                 const product = getProductById(item.id);
                 const itemTotal = (product.price * item.quantity).toFixed(2);
 
                 cartItemsHTML += `
-                        <div class="cart-item" data-id="${product.id}">
-                            <div>
-                                <img src="${product.image}" alt="${product.name}">
+                            <div class="cart-item" data-id="${product.id}">
+                                <div>
+                                    <img src="${product.image}" alt="${product.name}">
+                                </div>
+                                <div>
+                                    <div class="product-name">${product.name}</div>
+                                    <div class="product-category">Category: ${product.category}</div>
+                                </div>
+                                <div>$${product.price}</div>
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn" onclick="changeQuantity(${product.id}, -1)">-</button>
+                                    <input type="number" class="quantity" value="${item.quantity}" min="1" max="10" onchange="updateQuantity(${product.id}, this.value)">
+                                    <button class="quantity-btn" onclick="changeQuantity(${product.id}, 1)">+</button>
+                                </div>
+                                <div>$${itemTotal}</div>
+                                <div>
+                                    <button class="remove-btn" onclick="removeItem(${product.id})">Remove</button>
+                                </div>
                             </div>
-                            <div>
-                                <div class="product-name">${product.name}</div>
-                                <div class="product-category">Category: ${product.category}</div>
-                            </div>
-                            <div>$${product.price}</div>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn" onclick="changeQuantity(${product.id}, -1)">-</button>
-                                <input type="number" class="quantity" value="${item.quantity}" min="1" max="10" onchange="updateQuantity(${product.id}, this.value)">
-                                <button class="quantity-btn" onclick="changeQuantity(${product.id}, 1)">+</button>
-                            </div>
-                            <div>$${itemTotal}</div>
-                            <div>
-                                <button class="remove-btn" onclick="removeItem(${product.id})">Remove</button>
-                            </div>
-                        </div>
-                    `;
+                        `;
             });
 
             cartItemsHTML += `</div>`;
 
             const cartHTML = `
-                    ${cartItemsHTML}
+                        ${cartItemsHTML}
 
-                    <div class="cart-summary">
-                        <h3>Order Summary</h3>
-                        <div class="coupon-container">
-                            <input type="text" class="coupon-input" placeholder="Enter coupon code">
-                            <button class="btn">Apply</button>
+                        <div class="cart-summary">
+                            <h3>Order Summary</h3>
+                            <div class="coupon-container">
+                                <input type="text" class="coupon-input" placeholder="Enter coupon code">
+                                <button class="btn">Apply</button>
+                            </div>
+                            <div class="summary-row">
+                                <div>Subtotal</div>
+                                <div>$${totals.subtotal}</div>
+                            </div>
+                            <div class="summary-row">
+                                <div>Shipping</div>
+                                <div>$${totals.shipping}</div>
+                            </div>
+                            <div class="summary-row">
+                                <div>Tax (8%)</div>
+                                <div>$${totals.tax}</div>
+                            </div>
+                            <div class="summary-row total">
+                                <div>Total</div>
+                                <div>$${totals.total}</div>
+                            </div>
                         </div>
-                        <div class="summary-row">
-                            <div>Subtotal</div>
-                            <div>$${totals.subtotal}</div>
-                        </div>
-                        <div class="summary-row">
-                            <div>Shipping</div>
-                            <div>$${totals.shipping}</div>
-                        </div>
-                        <div class="summary-row">
-                            <div>Tax (8%)</div>
-                            <div>$${totals.tax}</div>
-                        </div>
-                        <div class="summary-row total">
-                            <div>Total</div>
-                            <div>$${totals.total}</div>
-                        </div>
-                    </div>
 
-                    <div class="btn-container">
-                        <a href="products-page.html" class="btn btn-secondary">Continue Shopping</a>
-                        <button class="btn" onclick="clearCart()">Clear Cart</button>
-                        <a href="checkout-page.html" class="btn btn-checkout">Proceed to Checkout</a>
-                    </div>
-                `;
+                        <div class="btn-container">
+                            <a href="products-page.html" class="btn btn-secondary">Continue Shopping</a>
+                            <button class="btn" onclick="clearCart()">Clear Cart</button>
+                            <a href="checkout-page.html" class="btn btn-checkout">Proceed to Checkout</a>
+                        </div>
+                    `;
 
             container.innerHTML = cartHTML;
         }
@@ -404,6 +405,27 @@
                         location.reload(); // reload page to update navbar
                     }
                 });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authLink = document.getElementById("auth-link");
+            const username = localStorage.getItem("username");
+
+            if (username) {
+                // ✅ User is logged in → show Logout
+                authLink.textContent = "Logout";
+                authLink.href = "#"; // prevent going to auth.html
+                authLink.onclick = () => {
+                    localStorage.removeItem("username"); // clear session
+                    alert("Logged out successfully!");
+                    window.location.reload(); // refresh page
+                };
+            } else {
+                // ❌ User not logged in → show Login/Signup
+                authLink.textContent = "Login / Signup";
+                authLink.href = "auth.html";
             }
         });
     </script>

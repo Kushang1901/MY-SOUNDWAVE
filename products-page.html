@@ -152,7 +152,8 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
-                    <li><a href="auth.html">Login / Signup</a></li>
+                    <li><a href="auth.html" id="auth-link">Login / Signup</a></li>
+
 
                 </ul>
             </nav>
@@ -264,16 +265,16 @@
                 const oldPrice = product.oldPrice ? `<span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$${product.oldPrice}</span>` : '';
 
                 grid.innerHTML += `
-                        <div class="product-card" data-id="${product.id}">
-                            <img src="${product.image}" alt="${product.name}" class="product-img">
-                            <div class="product-info">
-                                <h3 class="product-title">${product.name}</h3>
-                                <div class="product-price">$${product.price} ${oldPrice}</div>
-                                <div class="product-rating">${stars} (${product.reviews} reviews)</div>
-                                <button class="btn" onclick="quickView(${product.id})">Quick View</button>
+                            <div class="product-card" data-id="${product.id}">
+                                <img src="${product.image}" alt="${product.name}" class="product-img">
+                                <div class="product-info">
+                                    <h3 class="product-title">${product.name}</h3>
+                                    <div class="product-price">$${product.price} ${oldPrice}</div>
+                                    <div class="product-rating">${stars} (${product.reviews} reviews)</div>
+                                    <button class="btn" onclick="quickView(${product.id})">Quick View</button>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
             });
         }
 
@@ -394,6 +395,27 @@
                         location.reload(); // reload page to update navbar
                     }
                 });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authLink = document.getElementById("auth-link");
+            const username = localStorage.getItem("username");
+
+            if (username) {
+                // ✅ User is logged in → show Logout
+                authLink.textContent = "Logout";
+                authLink.href = "#"; // prevent going to auth.html
+                authLink.onclick = () => {
+                    localStorage.removeItem("username"); // clear session
+                    alert("Logged out successfully!");
+                    window.location.reload(); // refresh page
+                };
+            } else {
+                // ❌ User not logged in → show Login/Signup
+                authLink.textContent = "Login / Signup";
+                authLink.href = "auth.html";
             }
         });
     </script>
