@@ -306,10 +306,12 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
+                    <li><a href="auth.html">Login / Signup</a></li>
+
                 </ul>
             </nav>
     </header>
-    
+
     <main>
         <section class="about-section">
             <h2 class="section-title">Our Story</h2>
@@ -322,23 +324,23 @@
                 <img src="image15.jpeg" alt="SoundWave Company" class="about-image">
             </div>
         </section>
-        
-       <section class="team-section">
-    <h2 class="section-title">Meet Our Team</h2>
-    <div class="team-grid">
-        <div class="team-member">
-            <img src="boy-image.png" alt="Kushang Acharya" class="member-img">
-            <div class="member-info">
-                <h3 class="member-name">Kushang Acharya</h3>
-                <p class="member-title">Roll no.14</p>
-                <p>Workoholic student which works honestly and not betraying with his work</p>
+
+        <section class="team-section">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="boy-image.png" alt="Kushang Acharya" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Kushang Acharya</h3>
+                        <p class="member-title">Roll no.14</p>
+                        <p>Workoholic student which works honestly and not betraying with his work</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
     </main>
-    
+
     <footer>
         <div class="footer-container">
             <div class="footer-column">
@@ -351,7 +353,7 @@
                     <li><a href="#">Deals</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Customer Service</h3>
                 <ul>
@@ -362,7 +364,7 @@
                     <li><a href="#">Payment Methods</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>About Us</h3>
                 <ul>
@@ -373,7 +375,7 @@
                     <li><a href="#">Store Locations</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Follow Us</h3>
                 <ul>
@@ -385,33 +387,55 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="copyright">
             <p>&copy; 2025 SoundWave. All rights reserved.</p>
         </div>
     </footer>
-<script>
-    function initCartCount() {
-        const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
-        
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        
-        document.getElementById('cartCountTop').textContent = totalItems;
-    }
-    
-    document.addEventListener('DOMContentLoaded', initCartCount);
-</script>
-<script src="tracker.js"></script>
-<script>
-  fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      action: "visit_page",
-      productId: "index.html"
-    })
-  }).catch(err => console.error("❌ Error sending activity:", err));
-</script>
+    <script>
+        function initCartCount() {
+            const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+            document.getElementById('cartCountTop').textContent = totalItems;
+        }
+
+        document.addEventListener('DOMContentLoaded', initCartCount);
+    </script>
+    <script src="tracker.js"></script>
+    <script>
+        fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "visit_page",
+                productId: "index.html"
+            })
+        }).catch(err => console.error("❌ Error sending activity:", err));
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginLink = document.querySelector('a[href="auth.html"]');
+
+            // Check if user is logged in
+            const username = localStorage.getItem("userId");
+
+            if (username) {
+                // If logged in → replace "Login / Signup" with username + Logout
+                loginLink.textContent = `Hi, ${username} (Logout)`;
+                loginLink.href = "#"; // prevent redirect to auth.html
+
+                loginLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    if (confirm("Are you sure you want to logout?")) {
+                        localStorage.removeItem("userId");
+                        location.reload(); // reload page to update navbar
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

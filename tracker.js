@@ -1,32 +1,42 @@
-// ✅ Assign Session ID if not exists
+// ✅ Session ID stored in browser (same across multiple page visits in one session)
 if (!localStorage.getItem("sessionId")) {
   localStorage.setItem("sessionId", crypto.randomUUID());
 }
 const sessionId = localStorage.getItem("sessionId");
 
-// ✅ Backend URL (update with your deployed backend)
+// ✅ Get logged-in userId (username) or fallback to "guest"
+const userId = localStorage.getItem("userId") || "guest";
+
+// ✅ Change this to your deployed backend URL
 const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";
 
-// ✅ Log Event (only visit_page)
-async function logPageVisit(pageName) {
+// ✅ Log Event
+async function logEvent(action, productId = null) {
   try {
     await fetch(`${BACKEND_URL}/track`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId: localStorage.getItem("userId") || "guest",
+        userId,
         sessionId,
-        action: "visit_page",
-        productId: pageName,
+        action,
+        productId
       }),
     });
   } catch (err) {
-    console.error("❌ Error logging page visit:", err);
+    console.error("Error logging event:", err);
   }
 }
 
 // ✅ Auto log page visits
 document.addEventListener("DOMContentLoaded", () => {
   const page = window.location.pathname.split("/").pop() || "home";
-  logPageVisit(page);
+  logEvent("visit_page", page);
+
+  // Track clicks on links
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      logEvent("click_link", link.href);
+    });
+  });
 });

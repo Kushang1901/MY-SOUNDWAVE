@@ -152,16 +152,18 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
+                    <li><a href="auth.html">Login / Signup</a></li>
+
                 </ul>
             </nav>
-          
-</header>
 
-    
+    </header>
+
+
     <div class="page-title">
         <h1>All Products</h1>
     </div>
-    
+
     <div class="filters">
         <h3>Filter Products</h3>
         <div class="filter-options">
@@ -197,16 +199,16 @@
             </div>
         </div>
     </div>
-    
+
     <div class="products-grid" id="productsGrid"></div>
-    
+
     <div class="pagination">
         <a href="#" class="active">1</a>
         <a href="#">2</a>
         <a href="#">3</a>
         <a href="#">Next →</a>
     </div>
-    
+
     <div class="quick-view" id="quickView">
         <div class="quick-view-content">
             <div class="quick-view-close" onclick="closeQuickView()">✕</div>
@@ -220,89 +222,89 @@
             </div>
         </div>
     </div>
-    
+
     <footer>
         <p>&copy; 2025 SoundWave. All rights reserved.</p>
     </footer>
-    
+
     <script>
         const products = [
-            {id: 1, name: "SoundWave Pro Earbuds", price: 129.99, oldPrice: 159.99, rating: 5, reviews: 128, category: "earbuds", image: "image3.jpg", description: "Our flagship wireless earbuds with active noise cancellation and 10-hour battery life."},
-            {id: 2, name: "SoundWave Elite Headphones", price: 199.99, rating: 4, reviews: 87, category: "headphones", image: "image4.jpg", description: "Premium over-ear headphones with studio-quality sound and supreme comfort."},
-            {id: 3, name: "SoundWave Mini Speaker", price: 79.99, rating: 4, reviews: 56, category: "speakers", image: "image5.jpeg", description: "Portable Bluetooth speaker with surprising sound quality and 12-hour battery life."},
-            {id: 4, name: "SoundWave Sport Earbuds", price: 89.99, rating: 5, reviews: 42, category: "earbuds", image: "image6.jpg", description: "Water-resistant earbuds perfect for workouts and outdoor activities."},
-            {id: 5, name: "SoundWave Ultra Headphones", price: 249.99, rating: 5, reviews: 63, category: "headphones", image: "image7.jpg", description: "Our top-tier wireless headphones with ultra-comfort design and 30-hour battery life."},
-            {id: 6, name: "SoundWave Party Speaker", price: 149.99, rating: 4, reviews: 38, category: "speakers", image: "image8.jpg", description: "Powerful speaker with LED lights and deep bass for your parties."},
+            { id: 1, name: "SoundWave Pro Earbuds", price: 129.99, oldPrice: 159.99, rating: 5, reviews: 128, category: "earbuds", image: "image3.jpg", description: "Our flagship wireless earbuds with active noise cancellation and 10-hour battery life." },
+            { id: 2, name: "SoundWave Elite Headphones", price: 199.99, rating: 4, reviews: 87, category: "headphones", image: "image4.jpg", description: "Premium over-ear headphones with studio-quality sound and supreme comfort." },
+            { id: 3, name: "SoundWave Mini Speaker", price: 79.99, rating: 4, reviews: 56, category: "speakers", image: "image5.jpeg", description: "Portable Bluetooth speaker with surprising sound quality and 12-hour battery life." },
+            { id: 4, name: "SoundWave Sport Earbuds", price: 89.99, rating: 5, reviews: 42, category: "earbuds", image: "image6.jpg", description: "Water-resistant earbuds perfect for workouts and outdoor activities." },
+            { id: 5, name: "SoundWave Ultra Headphones", price: 249.99, rating: 5, reviews: 63, category: "headphones", image: "image7.jpg", description: "Our top-tier wireless headphones with ultra-comfort design and 30-hour battery life." },
+            { id: 6, name: "SoundWave Party Speaker", price: 149.99, rating: 4, reviews: 38, category: "speakers", image: "image8.jpg", description: "Powerful speaker with LED lights and deep bass for your parties." },
         ];
 
-	function getCart() {
-        return JSON.parse(localStorage.getItem('soundwaveCart')) || [];
-    }
-         function saveCart(cart) {
-        localStorage.setItem('soundwaveCart', JSON.stringify(cart));
-        updateCartCount();
-    }
-	function updateCartCount() {
-        const cart = getCart();
-        const count = cart.reduce((total, item) => total + item.quantity, 0);
-        document.querySelector('.cart-count').textContent = count;
-     }
-	
+        function getCart() {
+            return JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+        }
+        function saveCart(cart) {
+            localStorage.setItem('soundwaveCart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        function updateCartCount() {
+            const cart = getCart();
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = count;
+        }
 
-	function initCartCount() {
-        updateCartCount();
-    }
+
+        function initCartCount() {
+            updateCartCount();
+        }
 
         function displayProducts(productList) {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
-            
+
             productList.forEach(product => {
                 const stars = '★'.repeat(product.rating) + '☆'.repeat(5 - product.rating);
                 const oldPrice = product.oldPrice ? `<span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$${product.oldPrice}</span>` : '';
-                
+
                 grid.innerHTML += `
-                    <div class="product-card" data-id="${product.id}">
-                        <img src="${product.image}" alt="${product.name}" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-title">${product.name}</h3>
-                            <div class="product-price">$${product.price} ${oldPrice}</div>
-                            <div class="product-rating">${stars} (${product.reviews} reviews)</div>
-                            <button class="btn" onclick="quickView(${product.id})">Quick View</button>
+                        <div class="product-card" data-id="${product.id}">
+                            <img src="${product.image}" alt="${product.name}" class="product-img">
+                            <div class="product-info">
+                                <h3 class="product-title">${product.name}</h3>
+                                <div class="product-price">$${product.price} ${oldPrice}</div>
+                                <div class="product-rating">${stars} (${product.reviews} reviews)</div>
+                                <button class="btn" onclick="quickView(${product.id})">Quick View</button>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
             });
         }
-        
+
         function filterProducts() {
             const category = document.getElementById('category').value;
             const price = document.getElementById('price').value;
             const rating = parseInt(document.getElementById('rating').value);
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
+
             let filtered = products.filter(product => {
                 // Category filter
                 if (category !== 'all' && product.category !== category) return false;
-                
+
                 // Price filter
                 if (price === '0-50' && product.price >= 50) return false;
                 if (price === '50-100' && (product.price < 50 || product.price >= 100)) return false;
                 if (price === '100-200' && (product.price < 100 || product.price >= 200)) return false;
                 if (price === '200+' && product.price < 200) return false;
-                
+
                 // Rating filter
                 if (rating > 0 && product.rating < rating) return false;
-                
+
                 // Search filter
                 if (searchTerm && !product.name.toLowerCase().includes(searchTerm)) return false;
-                
+
                 return true;
             });
-            
+
             displayProducts(filtered);
         }
-        
+
         function resetFilters() {
             document.getElementById('category').value = 'all';
             document.getElementById('price').value = 'all';
@@ -310,7 +312,7 @@
             document.getElementById('searchInput').value = '';
             displayProducts(products);
         }
-        
+
         function quickView(id) {
             const product = products.find(p => p.id === id);
             document.getElementById('quickViewImg').src = product.image;
@@ -320,59 +322,81 @@
             document.getElementById('quickViewDesc').textContent = product.description;
             document.getElementById('quickView').style.display = 'flex';
         }
-        
+
         function closeQuickView() {
             document.getElementById('quickView').style.display = 'none';
         }
-        
+
         function addToCart() {
-    const quickViewTitle = document.getElementById('quickViewTitle').textContent;
-    const product = products.find(p => p.name === quickViewTitle);
-    
-    if (!product) return;
-    
-    let cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
-    
-    const existingItemIndex = cart.findIndex(item => item.id === product.id);
-    
-    if (existingItemIndex !== -1) {
-        if (cart[existingItemIndex].quantity < 10) {
-            cart[existingItemIndex].quantity += 1;
+            const quickViewTitle = document.getElementById('quickViewTitle').textContent;
+            const product = products.find(p => p.name === quickViewTitle);
+
+            if (!product) return;
+
+            let cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+
+            const existingItemIndex = cart.findIndex(item => item.id === product.id);
+
+            if (existingItemIndex !== -1) {
+                if (cart[existingItemIndex].quantity < 10) {
+                    cart[existingItemIndex].quantity += 1;
+                }
+            }
+            else {
+                cart.push({
+                    id: product.id,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('soundwaveCart', JSON.stringify(cart));
+
+            const count = document.querySelector('.cart-count');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            count.textContent = totalItems;
+
+            closeQuickView();
+
+            alert('Product added to cart!');
         }
-    } 
-	else {
-        cart.push({
-            id: product.id,
-            quantity: 1
-        });
-    }
-    
-    localStorage.setItem('soundwaveCart', JSON.stringify(cart));
-    
-    const count = document.querySelector('.cart-count');
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    count.textContent = totalItems;
-    
-    closeQuickView();
-    
-    alert('Product added to cart!');
-}
-        
+
         displayProducts(products);
-        
+
         document.getElementById('searchInput').addEventListener('input', filterProducts);
     </script>
-	<script src="tracker.js"></script>
-<script>
-  fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      action: "visit_page",
-      productId: "index.html"
-    })
-  }).catch(err => console.error("❌ Error sending activity:", err));
-</script>
+    <script src="tracker.js"></script>
+    <script>
+        fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "visit_page",
+                productId: "index.html"
+            })
+        }).catch(err => console.error("❌ Error sending activity:", err));
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginLink = document.querySelector('a[href="auth.html"]');
+
+            // Check if user is logged in
+            const username = localStorage.getItem("userId");
+
+            if (username) {
+                // If logged in → replace "Login / Signup" with username + Logout
+                loginLink.textContent = `Hi, ${username} (Logout)`;
+                loginLink.href = "#"; // prevent redirect to auth.html
+
+                loginLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    if (confirm("Are you sure you want to logout?")) {
+                        localStorage.removeItem("userId");
+                        location.reload(); // reload page to update navbar
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

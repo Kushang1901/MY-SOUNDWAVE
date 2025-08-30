@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWave - Sign In</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .auth-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🎵";
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .divider {
+            position: relative;
+            margin: 25px 0;
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 15px;
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .google-btn:hover {
+            border-color: #4285f4;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.2);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNDMgMTEuNTNMMy41MyAxNC41M0wwLjYxIDE0LjYyQzAuMjIgMTMuMyAwIDExLjY5IDAgMTBDMCA4LjMxIDAuMjIgNi43IDAuNjEgNS4zOEwzLjUzIDUuNDdMNC40MyA4LjQ3QzQuMTUgOS4yNCA0IDE5LjA1IDQgMTBDNCA5Ljk1IDQuMDEgOS45IDQuMDMgOS44NUw0LjQzIDExLjUzWiIgZmlsbD0iI0ZCQkMwNCIvPgo8cGF0aCBkPSJNMTkuNjIgOC4wOUMxOS44OCA4Ljg3IDIwIDkuNyAyMCAxMC41NEMyMCAxMS4zIDIwLjQgMTIuNTggMTkuMzQgMTIuNThIMTMuOTVWMTEuOTJIMTkuNjJaIiBmaWxsPSIjMzRBODUzIi8+CjxwYXRoIGQ9Ik0xOS42MiA4LjA5SDE5Ljk5VjguNTVIMTkuNjJWOC4wOVoiIGZpbGw9IiMzNEE4NTMiLz4KPHA+PC9wPgo8L3N2Zz4K');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .auth-links {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .auth-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .page-toggle {
+            margin-bottom: 20px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 30px 20px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div class="page-toggle">
+                <button class="toggle-btn" onclick="showSignup()">Create Account →</button>
+            </div>
+
+            <div class="logo">SoundWave</div>
+            <p class="subtitle">Welcome back! Sign in to your account</p>
+
+            <div id="loginSuccess" class="success-message hidden">
+                Welcome back! You've successfully signed in.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                    <div id="loginEmailError" class="error-message hidden">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <div id="loginPasswordError" class="error-message hidden">Password is required</div>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#" onclick="handleForgotPassword()">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <button class="google-btn" onclick="handleGoogleAuth('signin')">
+                <div class="google-icon"></div>
+                Continue with Google
+            </button>
+
+            <div class="auth-links">
+                Don't have an account? <a href="#" onclick="showSignup()">Sign up here</a>
+            </div>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="hidden">
+            <div class="page-toggle">
+                <button class="toggle-btn" onclick="showLogin()">← Back to Sign In</button>
+            </div>
+
+            <div class="logo">SoundWave</div>
+            <p class="subtitle">Join the premium audio experience</p>
+
+            <div id="signupSuccess" class="success-message hidden">
+                Account created successfully! Please check your email to verify your account.
+            </div>
+
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" name="name" required>
+                    <div id="signupNameError" class="error-message hidden">Full name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" name="email" required>
+                    <div id="signupEmailError" class="error-message hidden">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" required minlength="8">
+                    <div id="signupPasswordError" class="error-message hidden">Password must be at least 8 characters long</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div id="confirmPasswordError" class="error-message hidden">Passwords do not match</div>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <button class="google-btn" onclick="handleGoogleAuth('signup')">
+                <div class="google-icon"></div>
+                Sign up with Google
+            </button>
+
+            <div class="auth-links">
+                Already have an account? <a href="#" onclick="showLogin()">Sign in here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form switching functionality
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('signupForm').classList.add('hidden');
+            clearMessages();
+        }
+
+        function showSignup() {
+            document.getElementById('signupForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            clearMessages();
+        }
+
+        function clearMessages() {
+            const messages = document.querySelectorAll('.success-message, .error-message');
+            messages.forEach(msg => msg.classList.add('hidden'));
+        }
+
+        // Login form handler
+        function handleLogin(event) {
+            event.preventDefault();
+            clearMessages();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            let isValid = true;
+
+            // Email validation
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('loginEmailError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Password validation
+            if (!password) {
+                document.getElementById('loginPasswordError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate login process
+                simulateLogin(email, password);
+            }
+        }
+
+        // Signup form handler
+        function handleSignup(event) {
+            event.preventDefault();
+            clearMessages();
+
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            let isValid = true;
+
+            // Name validation
+            if (!name.trim()) {
+                document.getElementById('signupNameError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Email validation
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('signupEmailError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Password validation
+            if (!password || password.length < 8) {
+                document.getElementById('signupPasswordError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate signup process
+                simulateSignup(name, email, password);
+            }
+        }
+
+        // Email validation helper
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Simulate login process
+        function simulateLogin(email, password) {
+            // In a real implementation, you would send these credentials to your backend
+            console.log('Login attempt:', { email, password });
+
+            // Show success message
+            document.getElementById('loginSuccess').classList.remove('hidden');
+
+            // In a real app, you would redirect to the dashboard or home page
+            setTimeout(() => {
+                alert('Login successful! Redirecting to dashboard...');
+                // window.location.href = '/dashboard';
+            }, 1500);
+        }
+
+        // Simulate signup process
+        function simulateSignup(name, email, password) {
+            // In a real implementation, you would send this data to your backend
+            console.log('Signup attempt:', { name, email, password });
+
+            // Show success message
+            document.getElementById('signupSuccess').classList.remove('hidden');
+
+            // Clear form
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        // Google authentication handler
+        function handleGoogleAuth(type) {
+            // In a real implementation, you would integrate with Google OAuth
+            console.log(`Google ${type} attempted`);
+
+            alert(`Google ${type} clicked! In a real implementation, this would redirect to Google OAuth.`);
+
+            // Example of what you'd implement:
+            // window.location.href = `https://accounts.google.com/oauth/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=email profile&response_type=code&state=${type}`;
+        }
+
+        // Forgot password handler
+        function handleForgotPassword() {
+            const email = prompt('Please enter your email address:');
+            if (email && isValidEmail(email)) {
+                alert('Password reset instructions have been sent to your email!');
+                // In a real implementation, you would send a password reset email
+                console.log('Password reset requested for:', email);
+            } else if (email) {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        // Add some nice animations
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.querySelector('.auth-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // Add floating animation to background
+        function createFloatingElements() {
+            const body = document.body;
+            for (let i = 0; i < 6; i++) {
+                const element = document.createElement('div');
+                element.style.position = 'fixed';
+                element.style.width = Math.random() * 100 + 50 + 'px';
+                element.style.height = element.style.width;
+                element.style.background = 'rgba(255, 255, 255, 0.1)';
+                element.style.borderRadius = '50%';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.animation = `float ${Math.random() * 10 + 10}s infinite linear`;
+                element.style.pointerEvents = 'none';
+                element.style.zIndex = '-1';
+                body.appendChild(element);
+            }
+        }
+
+        // Add CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+                @keyframes float {
+                    0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+                    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
+                    100% { transform: translateY(0px) rotate(360deg); opacity: 0.7; }
+                }
+            `;
+        document.head.appendChild(style);
+
+        // Initialize floating elements
+        createFloatingElements();
+    </script>
+    <script>
+        const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";  // ✅ use your Render backend
+
+        // Handle Signup
+        document.getElementById("signupForm")?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("signupName").value;
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/auth/signup`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await res.json();
+                alert(data.message);
+
+                if (data.success) {
+                    // Redirect user to login page after signup
+                    window.location.href = "login.html";
+                }
+            } catch (err) {
+                console.error("Signup error:", err);
+                alert("Signup failed. Try again.");
+            }
+        });
+
+        // Handle Login
+        document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/auth/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+                if (!data.success) {
+                    alert(data.message || "Login failed");
+                    return;
+                }
+
+                // ✅ Save user info in localStorage (used by tracker.js)
+                localStorage.setItem("userId", data.userId);
+                localStorage.setItem("userName", data.name);
+
+                alert("Welcome " + data.name + "! 🎉");
+
+                // Redirect to homepage (or any page)
+                window.location.href = "index.html";
+            } catch (err) {
+                console.error("Login error:", err);
+                alert("Login failed. Try again.");
+            }
+        });
+    </script>
+
+</body>
+</html>

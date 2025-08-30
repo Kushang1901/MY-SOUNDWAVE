@@ -421,18 +421,20 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
+                    <li><a href="auth.html">Login / Signup</a></li>
+
 
                 </ul>
             </nav>
-           
+
     </header>
-    
+
     <main>
         <section class="page-title">
             <h1>Product Categories</h1>
             <p>Explore our wide range of premium audio devices organized by category. From wireless earbuds to home theater systems, find the perfect audio solution for your needs.</p>
         </section>
-        
+
         <section class="categories-container">
             <div class="categories-grid">
                 <a href="#" class="category-card">
@@ -444,7 +446,7 @@
                         <div class="btn">Browse Headphones</div>
                     </div>
                 </a>
-                
+
                 <a href="#" class="category-card">
                     <img src="image10.jpg" alt="Wireless Earbuds" class="category-img">
                     <div class="category-info">
@@ -454,7 +456,7 @@
                         <div class="btn">Browse Earbuds</div>
                     </div>
                 </a>
-                
+
                 <a href="#" class="category-card">
                     <img src="image11.jpg" alt="Speakers" class="category-img">
                     <div class="category-info">
@@ -464,7 +466,7 @@
                         <div class="btn">Browse Speakers</div>
                     </div>
                 </a>
-                
+
                 <a href="#" class="category-card">
                     <img src="image12.jpg" alt="Home Audio" class="category-img">
                     <div class="category-info">
@@ -474,7 +476,7 @@
                         <div class="btn">Browse Home Audio</div>
                     </div>
                 </a>
-                
+
                 <a href="#" class="category-card">
                     <img src="image13.jpg" alt="Professional Audio" class="category-img">
                     <div class="category-info">
@@ -484,7 +486,7 @@
                         <div class="btn">Browse Pro Audio</div>
                     </div>
                 </a>
-                
+
                 <a href="#" class="category-card">
                     <img src="image14.jpg" alt="Accessories" class="category-img">
                     <div class="category-info">
@@ -497,7 +499,7 @@
             </div>
         </section>
     </main>
-    
+
     <footer>
         <div class="footer-container">
             <div class="footer-column">
@@ -510,7 +512,7 @@
                     <li><a href="#">Deals</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Customer Service</h3>
                 <ul>
@@ -521,7 +523,7 @@
                     <li><a href="#">Payment Methods</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>About Us</h3>
                 <ul>
@@ -532,8 +534,8 @@
                     <li><a href="#">Store Locations</a></li>
                 </ul>
             </div>
-            
-           <div class="footer-column">
+
+            <div class="footer-column">
                 <h3>Follow Us</h3>
                 <ul>
                     <li><a href="https://www.facebook.com/kushang.acharya">Facebook</a></li>
@@ -545,12 +547,12 @@
             </div>
         </div>
 
-        
+
         <div class="copyright">
             <p>&copy; 2025 SoundWave. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <!-- Chatbot -->
     <div class="chatbot-container">
         <div class="chatbot-button" onclick="toggleChatbot()">💬</div>
@@ -572,7 +574,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         function toggleChatbot() {
             const chatbotPopup = document.querySelector('.chatbot-popup');
@@ -582,56 +584,56 @@
                 chatbotPopup.style.display = 'block';
             }
         }
-        
+
         function sendMessage() {
             const userInput = document.getElementById('userMessage');
             const chatMessages = document.getElementById('chatMessages');
-            
+
             if (userInput.value.trim() === '') return;
-            
+
             // Add user message
             chatMessages.innerHTML += `
-                <div class="message user-message">
-                    <div class="message-text">
-                        ${userInput.value}
-                    </div>
-                </div>
-            `;
-            
-            // Process message and get response
-            const response = getBotResponse(userInput.value);
-            
-            // Add bot response after a short delay
-            setTimeout(() => {
-                chatMessages.innerHTML += `
-                    <div class="message bot-message">
+                    <div class="message user-message">
                         <div class="message-text">
-                            ${response}
+                            ${userInput.value}
                         </div>
                     </div>
                 `;
-                
+
+            // Process message and get response
+            const response = getBotResponse(userInput.value);
+
+            // Add bot response after a short delay
+            setTimeout(() => {
+                chatMessages.innerHTML += `
+                        <div class="message bot-message">
+                            <div class="message-text">
+                                ${response}
+                            </div>
+                        </div>
+                    `;
+
                 // Auto scroll to bottom
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }, 500);
-            
+
             userInput.value = '';
-            
+
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-    function initCartCount() {
-        const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
-        
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        
-        document.getElementById('cartCountTop').textContent = totalItems;
-    }
-    
-    document.addEventListener('DOMContentLoaded', initCartCount);
-        
+        function initCartCount() {
+            const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+            document.getElementById('cartCountTop').textContent = totalItems;
+        }
+
+        document.addEventListener('DOMContentLoaded', initCartCount);
+
         function getBotResponse(message) {
             message = message.toLowerCase();
-            
+
             if (message.includes("noise cancellation") || message.includes("noise cancel")) {
                 return "Yes! Our latest SoundWave Pro Earbuds come with active noise cancellation and a 10-hour battery life. They're perfect for commuting or working in noisy environments!";
             } else if (message.includes("discount") || message.includes("offer") || message.includes("deal")) {
@@ -654,25 +656,47 @@
                 return "I'd be happy to help with that. Would you like me to connect you with one of our product specialists for more information?";
             }
         }
-        
+
         // Allow sending message with Enter key
-        document.getElementById('userMessage').addEventListener('keypress', function(e) {
+        document.getElementById('userMessage').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
     </script>
-<script src="tracker.js"></script>
-<script>
-  fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      action: "visit_page",
-      productId: "index.html"
-    })
-  }).catch(err => console.error("❌ Error sending activity:", err));
-</script>
+    <script src="tracker.js"></script>
+    <script>
+        fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "visit_page",
+                productId: "index.html"
+            })
+        }).catch(err => console.error("❌ Error sending activity:", err));
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginLink = document.querySelector('a[href="auth.html"]');
+
+            // Check if user is logged in
+            const username = localStorage.getItem("userId");
+
+            if (username) {
+                // If logged in → replace "Login / Signup" with username + Logout
+                loginLink.textContent = `Hi, ${username} (Logout)`;
+                loginLink.href = "#"; // prevent redirect to auth.html
+
+                loginLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    if (confirm("Are you sure you want to logout?")) {
+                        localStorage.removeItem("userId");
+                        location.reload(); // reload page to update navbar
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

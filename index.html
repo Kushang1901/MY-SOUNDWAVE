@@ -440,11 +440,13 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
+                    <li><a href="auth.html">Login / Signup</a></li>
+
                 </ul>
             </nav>
-            
+
     </header>
-    
+
     <main>
         <section class="hero">
             <div class="hero-content">
@@ -453,13 +455,13 @@
                 <a href="products-page.html" class="btn">Shop Now</a>
             </div>
         </section>
-        
+
         <div class="promo-banner">
             <h2>FLASH SALE! 20% OFF WIRELESS EARBUDS</h2>
             <p>Limited time offer. Don't miss out on our best-selling products!</p>
             <a href="deals-page.html" class="btn">Shop Deals</a>
         </div>
-        
+
         <section class="featured-products">
             <h2 class="section-title">Featured Products</h2>
             <div class="products-grid">
@@ -472,7 +474,7 @@
                         <a href="product.html" class="btn">View Details</a>
                     </div>
                 </div>
-                
+
                 <div class="product-card">
                     <img src="image4.jpg" alt="SoundWave Elite Headphones" class="product-img">
                     <div class="product-info">
@@ -482,7 +484,7 @@
                         <a href="#" class="btn">View Details</a>
                     </div>
                 </div>
-                
+
                 <div class="product-card">
                     <img src="image5.jpeg" alt="SoundWave Mini Speaker" class="product-img">
                     <div class="product-info">
@@ -492,7 +494,7 @@
                         <a href="#" class="btn">View Details</a>
                     </div>
                 </div>
-                
+
                 <div class="product-card">
                     <img src="image6.jpg" alt="SoundWave Sport Earbuds" class="product-img">
                     <div class="product-info">
@@ -505,7 +507,7 @@
             </div>
         </section>
     </main>
-    
+
     <footer>
         <div class="footer-container">
             <div class="footer-column">
@@ -518,7 +520,7 @@
                     <li><a href="#">Deals</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Customer Service</h3>
                 <ul>
@@ -529,7 +531,7 @@
                     <li><a href="#">Payment Methods</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>About Us</h3>
                 <ul>
@@ -540,7 +542,7 @@
                     <li><a href="#">Store Locations</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Follow Us</h3>
                 <ul>
@@ -553,12 +555,12 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="copyright">
             <p>&copy; 2025 SoundWave. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <!-- Chatbot -->
     <div class="chatbot-container">
         <div class="chatbot-button" onclick="toggleChatbot()">💬</div>
@@ -580,7 +582,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         function toggleChatbot() {
             const chatbotPopup = document.querySelector('.chatbot-popup');
@@ -590,57 +592,57 @@
                 chatbotPopup.style.display = 'block';
             }
         }
- function initCartCount() {
-        const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
-        
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        
-        document.getElementById('cartCountTop').textContent = totalItems;
-    }
-    
-    document.addEventListener('DOMContentLoaded', initCartCount);
-        
+        function initCartCount() {
+            const cart = JSON.parse(localStorage.getItem('soundwaveCart')) || [];
+
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+            document.getElementById('cartCountTop').textContent = totalItems;
+        }
+
+        document.addEventListener('DOMContentLoaded', initCartCount);
+
         function sendMessage() {
-    const userInput = document.getElementById('userMessage');
-    const chatMessages = document.getElementById('chatMessages');
-    
-    if (userInput.value.trim() === '') return;
-    
-    // Add user message
-    chatMessages.innerHTML += `
-        <div class="message user-message">
-            <div class="message-text">
-                ${userInput.value}
-            </div>
-        </div>
-    `;
-    
-    // Process message and get response
-    const response = getBotResponse(userInput.value);
-    
-    // Add bot response after a short delay
-    setTimeout(() => {
-        chatMessages.innerHTML += `
-            <div class="message bot-message">
+            const userInput = document.getElementById('userMessage');
+            const chatMessages = document.getElementById('chatMessages');
+
+            if (userInput.value.trim() === '') return;
+
+            // Add user message
+            chatMessages.innerHTML += `
+            <div class="message user-message">
                 <div class="message-text">
-                    ${response}
+                    ${userInput.value}
                 </div>
             </div>
         `;
-        
-        // Auto scroll to bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 500);
-    
-    userInput.value = '';
-    
-    // Auto scroll to bottom
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-        
+
+            // Process message and get response
+            const response = getBotResponse(userInput.value);
+
+            // Add bot response after a short delay
+            setTimeout(() => {
+                chatMessages.innerHTML += `
+                <div class="message bot-message">
+                    <div class="message-text">
+                        ${response}
+                    </div>
+                </div>
+            `;
+
+                // Auto scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+
+            userInput.value = '';
+
+            // Auto scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
         function getBotResponse(message) {
             message = message.toLowerCase();
-            
+
             if (message.includes("noise cancellation") || message.includes("noise cancel")) {
                 return "Yes! Our latest SoundWave Pro Earbuds come with active noise cancellation and a 10-hour battery life. They're perfect for commuting or working in noisy environments!";
             } else if (message.includes("discount") || message.includes("offer") || message.includes("deal")) {
@@ -663,25 +665,47 @@
                 return "I'd be happy to help with that. Would you like me to connect you with one of our product specialists for more information?";
             }
         }
-        
+
         // Allow sending message with Enter key
-        document.getElementById('userMessage').addEventListener('keypress', function(e) {
+        document.getElementById('userMessage').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
     </script>
-<script src="tracker.js"></script>
-<script>
-  fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      action: "visit_page",
-      productId: "index.html"
-    })
-  }).catch(err => console.error("❌ Error sending activity:", err));
-</script>
+    <script src="tracker.js"></script>
+    <script>
+        fetch("https://soundwave-backend-391w.onrender.com/api/activity", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "visit_page",
+                productId: "index.html"
+            })
+        }).catch(err => console.error("❌ Error sending activity:", err));
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginLink = document.querySelector('a[href="auth.html"]');
+
+            // Check if user is logged in
+            const username = localStorage.getItem("userId");
+
+            if (username) {
+                // If logged in → replace "Login / Signup" with username + Logout
+                loginLink.textContent = `Hi, ${username} (Logout)`;
+                loginLink.href = "#"; // prevent redirect to auth.html
+
+                loginLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    if (confirm("Are you sure you want to logout?")) {
+                        localStorage.removeItem("userId");
+                        location.reload(); // reload page to update navbar
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
