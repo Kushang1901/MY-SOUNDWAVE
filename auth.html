@@ -466,13 +466,37 @@
 
         // Google authentication handler
         function handleGoogleAuth(type) {
-            // In a real implementation, you would integrate with Google OAuth
-            console.log(`Google ${type} attempted`);
+            google.accounts.id.initialize({
+                client_id: "852786183975-gcli5397empudv5hfdt4j1bs21l9bemt.apps.googleusercontent.com",
+                callback: async (response) => {
+                    try {
+                        // Send Google credential to backend
+                        const res = await fetch(`${BACKEND_URL}/auth/google`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ credential: response.credential })
+                        });
 
-            alert(`Google ${type} clicked! In a real implementation, this would redirect to Google OAuth.`);
+                        const data = await res.json();
 
-            // Example of what you'd implement:
-            // window.location.href = `https://accounts.google.com/oauth/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=email profile&response_type=code&state=${type}`;
+                        if (data.success) {
+                            localStorage.setItem("userId", data.userId);
+                            localStorage.setItem("username", data.name);
+
+                            alert("Welcome " + data.name + "! 🎉");
+                            window.location.href = "index.html";
+                        } else {
+                            alert("Google login failed: " + data.message);
+                        }
+                    } catch (err) {
+                        console.error("Google login error:", err);
+                        alert("Something went wrong.");
+                    }
+                }
+            });
+
+            // Show the popup for Google login
+            google.accounts.id.prompt();
         }
 
         // Forgot password handler
@@ -522,17 +546,18 @@
         // Add CSS for floating animation
         const style = document.createElement('style');
         style.textContent = `
-                @keyframes float {
-                    0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-                    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
-                    100% { transform: translateY(0px) rotate(360deg); opacity: 0.7; }
-                }
-            `;
+                    @keyframes float {
+                        0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+                        50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
+                        100% { transform: translateY(0px) rotate(360deg); opacity: 0.7; }
+                    }
+                `;
         document.head.appendChild(style);
 
         // Initialize floating elements
         createFloatingElements();
     </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
         const BACKEND_URL = "https://soundwave-backend-391w.onrender.com";  // ✅ use your Render backend
 
