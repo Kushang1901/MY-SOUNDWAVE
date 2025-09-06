@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>SoundWave - Deals & Promotions</title>
     <style>
         * {
@@ -11,17 +13,24 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        body { background-color: #f5f5f5; }
-        
+
+        body {
+            background-color: #f5f5f5;
+            padding-top: 80px;
+        }
+
         header {
             background-color: #2c3e50;
             padding: 1rem;
-            position: sticky;
+            position: fixed; /* fixed instead of sticky */
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 100;
+            transition: top 0.4s ease; /* smooth hide/show */
         }
-        
+
+
         .header-container {
             display: flex;
             justify-content: space-between;
@@ -29,59 +38,71 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .logo {
-  color: white;
-  font-size: 1.8rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-decoration: none;  /* remove underline */
-}
+            display: flex;
+            align-items: center;
+            gap: 10px; /* space between logo image and text */
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none; /* remove underline */
+        }
 
-.logo span {
-  color: #3498db;
-}
+            .logo img {
+                height: 40px; /* adjust logo size */
+                width: auto;
+                display: block;
+            }
 
-        
+            .logo span {
+                color: #3498db;
+            }
+
         nav ul {
             display: flex;
             list-style: none;
         }
-        
-        nav ul li { margin-left: 1.5rem; }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover { color: #3498db; }
-        
+
+            nav ul li {
+                margin-left: 1.5rem;
+            }
+
+                nav ul li a {
+                    color: white;
+                    text-decoration: none;
+                    transition: color 0.3s;
+                }
+
+                    nav ul li a:hover {
+                        color: #3498db;
+                    }
+
         .search-cart {
             display: flex;
             align-items: center;
         }
-        
+
         .search-box {
             margin-right: 1rem;
             position: relative;
         }
-        
-        .search-box input {
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: none;
-            width: 200px;
-        }
-        
+
+            .search-box input {
+                padding: 0.5rem;
+                border-radius: 4px;
+                border: none;
+                width: 200px;
+            }
+
         .cart-icon {
             position: relative;
             color: white;
             font-size: 1.2rem;
             cursor: pointer;
         }
-        
+
         .cart-count {
             position: absolute;
             top: -8px;
@@ -96,33 +117,33 @@
             align-items: center;
             font-size: 0.7rem;
         }
-        
+
         .deals-header {
             background-color: #e74c3c;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
-        
+
         .deals-container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2rem;
             color: #2c3e50;
         }
-        
+
         .deals-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .deal-card {
             background-color: white;
             border-radius: 8px;
@@ -130,7 +151,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: relative;
         }
-        
+
         .deal-badge {
             position: absolute;
             top: 10px;
@@ -141,37 +162,37 @@
             border-radius: 4px;
             font-weight: bold;
         }
-        
+
         .deal-img {
             height: 200px;
             width: 100%;
             object-fit: cover;
         }
-        
+
         .deal-info {
             padding: 1rem;
         }
-        
+
         .deal-title {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: #2c3e50;
         }
-        
+
         .deal-price {
             font-size: 1.3rem;
             color: #2c3e50;
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
-        
+
         .deal-original {
             text-decoration: line-through;
             color: #7f8c8d;
             font-size: 1rem;
             font-weight: normal;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
@@ -182,21 +203,23 @@
             font-weight: bold;
             transition: background-color 0.3s;
         }
-        
-        .btn:hover { background-color: #2980b9; }
-        
+
+            .btn:hover {
+                background-color: #2980b9;
+            }
+
         .countdown {
             margin-top: 0.5rem;
             font-size: 0.9rem;
             color: #e74c3c;
         }
-        
+
         footer {
             background-color: #2c3e50;
             color: white;
             padding: 3rem 1rem;
         }
-        
+
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -204,31 +227,38 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
         }
-        
+
         .footer-column h3 {
             font-size: 1.2rem;
             margin-bottom: 1rem;
             color: #3498db;
         }
-        
-        .footer-column ul { list-style: none; }
-        
-        .footer-column ul li { margin-bottom: 0.5rem; }
-        
-        .footer-column ul li a {
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: color 0.3s;
+
+        .footer-column ul {
+            list-style: none;
         }
-        
-        .footer-column ul li a:hover { color: #3498db; }
-        
+
+            .footer-column ul li {
+                margin-bottom: 0.5rem;
+            }
+
+                .footer-column ul li a {
+                    color: #ecf0f1;
+                    text-decoration: none;
+                    transition: color 0.3s;
+                }
+
+                    .footer-column ul li a:hover {
+                        color: #3498db;
+                    }
+
         .copyright {
             text-align: center;
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid #34495e;
         }
+
         .menu-toggle {
             display: none; /* hidden by default */
         }
@@ -259,8 +289,8 @@
                 color: white;
                 font-size: 1.5rem;
                 cursor: pointer;
-                top: 18px; 
-                right: 20px; 
+                top: 18px;
+                right: 20px;
             }
 
             /* Search box */
@@ -301,13 +331,15 @@
                 font-size: 0.9rem;
             }
         }
-
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <a href="index.html" class="logo">Sound<span>Wave</span></a>
+            <a href="index.html" class="logo">
+                <img src="SoundWave Logo.png" alt="SoundWave Logo">
+                Sound<span>Wave</span>
+            </a>
             <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</div>
 
             <nav>
@@ -318,6 +350,7 @@
                     <li><a href="deals-page.html">Deals</a></li>
                     <li><a href="about-us-page.html">About Us</a></li>
                     <li><a href="contact-page.html">Contact</a></li>
+                    <li><a href="cart-page.html">My Cart</a></li>
                     <li><a href="auth.html" id="auth-link">Login / Signup</a></li>
 
 
@@ -497,6 +530,20 @@
                     }
                 });
             }
+        });
+
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > lastScrollY) {
+                // Scrolling down → hide header
+                header.style.top = "-80px"; // adjust based on header height
+            } else {
+                // Scrolling up → show header
+                header.style.top = "0";
+            }
+            lastScrollY = window.scrollY;
         });
     </script>
     <script>
